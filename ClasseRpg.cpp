@@ -82,6 +82,10 @@ bool ClasseRpg::retornaCongelado() const{
     return this->congelado;
 }
 
+bool ClasseRpg::retornaDefendendoForte() const{
+    return this->defendendo_forte;
+}
+
 void ClasseRpg::modificaAtaque(int acrescimo){
     this->ataque += acrescimo;
 }
@@ -99,6 +103,9 @@ void ClasseRpg::modificaHp(int acrescimo){
 }
 
 void ClasseRpg::modificaAtordoado(bool novo_estado){
+    if(novo_estado){
+        cout << "O jogador foi atordoado!\n\n"; 
+    }
     this->atordoado = novo_estado;
 }
 
@@ -107,7 +114,15 @@ void ClasseRpg::modificaDefendendo(bool novo_estado){
 }
 
 void ClasseRpg::modificaCongelado(bool novo_estado){
+    if(novo_estado){
+        cout << "O jogador foi congelado!!\n\n";
+    }
+        
     this->congelado = novo_estado;
+}
+
+void ClasseRpg::modificaDefendendoForte(bool novo_estado){
+    this->defendendo_forte = novo_estado;
 }
 
 void ClasseRpg::defineClasse(const string &classe){

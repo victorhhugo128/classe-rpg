@@ -1,10 +1,12 @@
 #ifndef CLASSERPG_H
 #define CLASSERPG_H
-#include<string>
+
+/* #include "Jogo.hpp" */
 
 class ClasseRpg
 {
     public:
+        friend class Jogo;
         ClasseRpg(const std::string &, int = 0, int = 0, int = 0);
         ClasseRpg(const std::string &, bool, bool, int = 0, int = 0, int = 0);
         ClasseRpg(const ClasseRpg &);
@@ -19,7 +21,7 @@ class ClasseRpg
         int hp, ataque, defesa;
         const int MAX_HP, N_ACOES;
         std::string nome;
-        bool atordoado = false, defendendo = false, congelado = false;
+        bool atordoado = false, defendendo = false, congelado = false, defendendo_forte = false;
     protected:
         int retornaHp() const;
         int retornaAtaque() const;
@@ -29,12 +31,14 @@ class ClasseRpg
         bool retornaAtordoado() const;
         bool retornaDefendendo() const;
         bool retornaCongelado() const;
+        bool retornaDefendendoForte() const;
         void modificaAtaque(int);
         void modificaDefesa(int);
         void modificaHp(int);
         void modificaAtordoado(bool);
         void modificaDefendendo(bool);
         void modificaCongelado(bool);
+        void modificaDefendendoForte(bool);
         void defineClasse(const std::string &);
         std::string retornaNome() const;
         std::string retornaClasse() const;
