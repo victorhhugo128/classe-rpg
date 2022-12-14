@@ -18,12 +18,15 @@ class Mago: public AtaqueDistancia
         void mostraAcoes() const;
         int ataqueBasico(int) const;
         int defender(int) const;
+        int ataqueCarregado() const;
 
         int bolaDeFogo();
 
     private:
         int mana;
         const int MAX_MANA;
+    protected:
+        bool herdado;
 
 };
 

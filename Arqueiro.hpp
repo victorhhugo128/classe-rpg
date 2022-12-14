@@ -13,11 +13,12 @@ class Arqueiro: public AtaqueDistancia
 
         int retornaStamina() const;
         void modificaStamina(int);
-        
+
         int escolheAcao() const;
         void mostraAcoes() const;
         int ataqueBasico(int) const;
         int defender(int) const;
+        int ataqueCarregado() const;
 
         int chuvaDeFlechas();
 

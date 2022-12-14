@@ -8,13 +8,13 @@ using std::cin;
 using std::string;
 
 Arqueiro::Arqueiro(const string &nome)
-:AtaqueDistancia(nome, 100, 30, 3), MAX_STAMINA(200){
+:AtaqueDistancia(nome, 100, 30, 4), MAX_STAMINA(200){
     this->stamina = MAX_STAMINA;
     this->defineClasse("arqueiro");
 }
 
 Arqueiro::Arqueiro(const string &nome, bool buff_ataque, bool buff_defesa)
-:AtaqueDistancia(nome, buff_ataque, buff_defesa, 100, 30, 3), MAX_STAMINA(200){
+:AtaqueDistancia(nome, buff_ataque, buff_defesa, 100, 30, 4), MAX_STAMINA(200){
     this->stamina = MAX_STAMINA;
     this->defineClasse("arqueiro");
 }
@@ -51,7 +51,7 @@ int Arqueiro::escolheAcao() const{
 }
 
 void Arqueiro::mostraAcoes() const{
-    cout << "1 - Ataque Básico\n2 - Defender\n3 - Chuva de Flechasn\n";
+    cout << "1 - Ataque Básico\n2 - Defender\n3 - Ataque Carregado\n4 - Chuva de Flechasn\n";
 }
 
 int Arqueiro::ataqueBasico(int distancia) const{
@@ -90,6 +90,11 @@ int Arqueiro::defender(int dano) const{
 
     return dano;
 
+}
+
+int Arqueiro::ataqueCarregado() const{
+    cout << " O ataque carregado de " << this->retornaClasse() << " " << this->retornaNome() << " foi um sucesso!\n\n";
+    return this->retornaAtaque() * 2;
 }
 
 

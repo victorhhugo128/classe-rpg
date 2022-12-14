@@ -8,20 +8,23 @@ using std::cin;
 using std::string;
 
 Mago::Mago(const string &nome)
-:AtaqueDistancia(nome, 150, 10, 3), MAX_MANA(200){
+:AtaqueDistancia(nome, 150, 10, 4), MAX_MANA(200){
     this->mana = MAX_MANA;
     this->defineClasse("mago");
+    this->herdado = false;
 }
 
 Mago::Mago(const string &nome, bool buff_ataque, bool buff_defesa)
-:AtaqueDistancia(nome, buff_ataque, buff_defesa, 150, 10, 3), MAX_MANA(200){
+:AtaqueDistancia(nome, buff_ataque, buff_defesa, 150, 10, 4), MAX_MANA(200){
     this->mana = MAX_MANA;
     this->defineClasse("mago");
+    this->herdado = false;
 }
 
 Mago::Mago(const Mago &other)
 :AtaqueDistancia(other), MAX_MANA(other.MAX_MANA){
     this->mana = other.mana;
+    this->herdado = other.herdado;
 }
 
 Mago::~Mago(){
@@ -37,12 +40,15 @@ void Mago::modificaMana(int acrescimo){
 }
 
 int Mago::escolheAcao() const{
-    int escolha = -1;
+    int escolha = -1, limite_superior = this->retornaNAcoes();
 
     cout << "Escolha uma das ações para o turno do Mago " << this->retornaNome() << ":\n";
     cin >> escolha;
+
+    if(this->herdado)
+        limite_superior += 1;
     
-    while(escolha < 1 && escolha >  this->retornaNAcoes()){
+    while(escolha < 1 && escolha >  limite_superior){
         cout << "Escolha inválida. Insira um valor válido: ";
         cin >> escolha;
     }
@@ -51,7 +57,10 @@ int Mago::escolheAcao() const{
 }
 
 void Mago::mostraAcoes() const{
-    cout << "1 - Ataque Básico\n2 - Defender\n3 - Bola de Fogon\n";
+    cout << "1 - Ataque Básico\n2 - Defender\n3 - Ataque Carregado\n4 - Bola de fogo\n";
+    if(this->herdado)
+        cout << "5 - Congelar\n";
+    cout << "\n";
 }
 
 int Mago::ataqueBasico(int distancia) const{
@@ -90,6 +99,11 @@ int Mago::defender(int dano) const{
 
     return dano;
 
+}
+
+int Mago::ataqueCarregado() const{
+    cout << " O ataque carregado de " << this->retornaClasse() << " " << this->retornaNome() << " foi um sucesso!\n\n";
+    return this->retornaAtaque() * 3;
 }
 
 int Mago::bolaDeFogo(){
