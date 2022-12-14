@@ -43,12 +43,13 @@ int Mago::escolheAcao() const{
     int escolha = -1, limite_superior = this->retornaNAcoes();
 
     cout << "Escolha uma das ações para o turno do Mago " << this->retornaNome() << ":\n";
+    this->mostraAcoes();
     cin >> escolha;
 
     if(this->herdado)
         limite_superior += 1;
     
-    while(escolha < 1 && escolha >  limite_superior){
+    while(escolha < 1 || escolha >  limite_superior){
         cout << "Escolha inválida. Insira um valor válido: ";
         cin >> escolha;
     }
@@ -65,14 +66,14 @@ void Mago::mostraAcoes() const{
 
 int Mago::ataqueBasico(int distancia) const{
     int chances = 100, dano_de_ataque = 0;
-    float multiplicador = 0;
+    float multiplicador = 0, num_rand = rand() % chances;
 
     if(rand() % chances > 85){ // 15% de chance do ataque falhar
         cout << "O ataque forte de " << this->retornaClasse() << " " << this->retornaNome() << " falhou.\n\n";
         return 0;
     }
 
-    multiplicador = (rand() % chances)/100;
+    multiplicador = num_rand/100;
 
     dano_de_ataque = multiplicador * this->retornaAtaque() + 10;
 
@@ -84,14 +85,14 @@ int Mago::ataqueBasico(int distancia) const{
 
 int Mago::defender(int dano) const{
     int dano_mitigado = 0;
-    float multiplicador = 0;
+    float multiplicador = 0, num_rand = rand() % 15;
 
     if(rand() % 100 > 50){ // 50% de chance de defender corretamente
         cout << "A defesa falhou.\n\n";
         return dano;
     } 
 
-    multiplicador = (rand() % 15)/100; // proporcional a 0 - 15% de mitigação de dano baseado na defesa
+    multiplicador = num_rand/100; // proporcional a 0 - 15% de mitigação de dano baseado na defesa
 
     dano_mitigado = dano - this->retornaDefesa()*multiplicador;
 
@@ -118,7 +119,7 @@ int Mago::bolaDeFogo(){
     }
 
     int dano = 150;
-    float multiplicador = (rand() % 100)/100 * this->retornaAtaque()/3;
+    float num_rand = rand() % 100, multiplicador = num_rand/100 * this->retornaAtaque()/3;
 
     cout << "A bola de fogo de " << this->retornaClasse() << " " << this->retornaNome() << " foi um sucesso.\n\n";
 

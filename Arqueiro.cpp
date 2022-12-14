@@ -40,9 +40,10 @@ int Arqueiro::escolheAcao() const{
     int escolha = -1;
 
     cout << "Escolha uma das ações para o turno do Arqueiro " << this->retornaNome() << ":\n";
+    this->mostraAcoes();
     cin >> escolha;
     
-    while(escolha < 1 && escolha >  this->retornaNAcoes()){
+    while(escolha < 1 || escolha >  this->retornaNAcoes()){
         cout << "Escolha inválida. Insira um valor válido: ";
         cin >> escolha;
     }
@@ -56,14 +57,16 @@ void Arqueiro::mostraAcoes() const{
 
 int Arqueiro::ataqueBasico(int distancia) const{
     int chances = 100, dano_de_ataque = 0;
-    float multiplicador = 0;
+    float multiplicador = 0, num_rand;
 
     if(rand() % chances > 98){ // 2% de chance do ataque falhar
         cout << "O ataque forte de " << this->retornaClasse() << " " << this->retornaNome() << " falhou.\n\n";
         return 0;
     }
 
-    multiplicador = (rand() % chances)/100;
+    num_rand = rand() % chances;
+
+    multiplicador = num_rand/100;
 
     dano_de_ataque = multiplicador * this->retornaAtaque() + 45;
 
@@ -75,14 +78,14 @@ int Arqueiro::ataqueBasico(int distancia) const{
 
 int Arqueiro::defender(int dano) const{
     int dano_mitigado = 0;
-    float multiplicador = 0;
+    float multiplicador = 0, num_rand = rand() % 30;
 
     if(rand() % 100 > 60){ // 60% de chance de defender corretamente
         cout << "A defesa falhou.\n\n";
         return dano;
     } 
 
-    multiplicador = (rand() % 30 + 5)/100; // proporcional a 5 - 35% de mitigação de dano baseado na defesa
+    multiplicador = (num_rand + 5)/100; // proporcional a 5 - 35% de mitigação de dano baseado na defesa
 
     dano_mitigado = dano - this->retornaDefesa()*multiplicador;
 
@@ -106,9 +109,10 @@ int Arqueiro::chuvaDeFlechas(){
 
     int n_flechas = rand() % 4 + 2; // de 2 a 6 flechas
     int dano = 0;
+    float num_rand = rand() % 4;
 
     for(int ataque = 0; ataque < n_flechas; ataque++){
-        dano += this->retornaAtaque() * (rand() % 4 + 2)/4;
+        dano += this->retornaAtaque() * (num_rand + 2)/4;
     }
 
     cout << "A chuva de flechas de " << this->retornaClasse() << " " << this->retornaNome() << " acertou " << n_flechas << " vezes!!\n\n";

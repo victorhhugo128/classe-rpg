@@ -38,9 +38,10 @@ int Assassino::escolheAcao() const{
     int escolha = -1;
 
     cout << "Escolha uma das ações para o turno do Guerreiro " << this->retornaNome() << ":\n";
+    this->mostraAcoes();
     cin >> escolha;
     
-    while(escolha < 1 && escolha >  this->retornaNAcoes()){
+    while(escolha < 1 || escolha >  this->retornaNAcoes()){
         cout << "Escolha inválida. Insira um valor válido: ";
         cin >> escolha;
     }
@@ -60,14 +61,14 @@ int Assassino::ataqueBasico(int distancia) const{
     }
 
     int chances = 100, dano_de_ataque = 0, critico = 1;
-    float multiplicador = 0;
+    float multiplicador = 0, num_rand = rand() % 100;
 
     if(rand() % chances > 95){ // 5% de chance do ataque falhar
         cout << "O ataque forte de " << this->retornaClasse() << " " << this->retornaNome() << " falhou.\n\n";
         return 0;
     }
 
-    multiplicador = (rand() % chances)/100;
+    multiplicador = num_rand/100;
 
     if(rand() % 100 > 50){ // 50% de chance de ataque crítico
         critico = 2;
@@ -83,14 +84,14 @@ int Assassino::ataqueBasico(int distancia) const{
 
 int Assassino::defender(int dano) const{
     int dano_mitigado = 0;
-    float multiplicador = 0;
+    float multiplicador = 0, num_rand = rand() % 30;
 
     if(rand() % 100 > 60){ // 60% de chance de defender corretamente
         cout << "A defesa falhou.\n\n";
         return dano;
     } 
 
-    multiplicador = (rand() % 30 + 5)/100; // proporcional a 5 - 35% de mitigação de dano baseado na defesa
+    multiplicador = (num_rand + 5)/100; // proporcional a 5 - 35% de mitigação de dano baseado na defesa
 
     dano_mitigado = dano - this->retornaDefesa()*multiplicador;
 
@@ -111,9 +112,7 @@ int Assassino::ataqueForte(int distancia){
     }
 
     int chances = 100, dano_de_ataque = 0, critico = 1;
-    float multiplicador = 0;
-
-    cout << rand() % chances << "\n";
+    float multiplicador = 0, num_rand = rand() % chances;
 
     if(rand() % chances > 80){ // 20% de chance do ataque falhar
         cout << "O ataque forte de " << this->retornaClasse() << " " << this->retornaNome() << " falhou.\n\n";
@@ -121,7 +120,7 @@ int Assassino::ataqueForte(int distancia){
     }
 
 
-    multiplicador = (rand() % chances)/100;
+    multiplicador = num_rand/100;
 
     if(rand() % 100 > 70){ // 30% de chance de ataque crítico
         critico = 2;
