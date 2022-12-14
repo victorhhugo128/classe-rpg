@@ -145,6 +145,7 @@ void Jogo::adicionarJogador(const string &nome, const string &classe){
                 break;
             default:
                 dados = this->acaoSubclasse(jogador1, opcao);
+                break;
         }
 
         if(dados[0] > 0){
@@ -152,7 +153,7 @@ void Jogo::adicionarJogador(const string &nome, const string &classe){
             if(jogador2->retornaDefendendo())
                 dano = jogador2->defender(dano);
             if(jogador2->retornaDefendendoForte())
-                dano = this->acaoSubclasse(jogador1, 5)[4];
+                dano = this->acaoSubclasse(jogador2, 5)[4];
             jogador2->recebeDano(dano);
         }
         else if(dados[1] > 0){
@@ -181,17 +182,18 @@ void Jogo::adicionarJogador(const string &nome, const string &classe){
                 dados = new int[5]{jogador2->ataqueBasico(this->distancia), 0, 0, 0, 0};
                 break;
             case 2:
-                dados = new int[0, 0, 1, 0, 0];
+                dados = new int[5]{0, 0, 1, 0, 0};
                 break;
             default:
                 dados = this->acaoSubclasse(jogador2, opcao);
+                break;
         }
 
         if(dados[0] > 0){
             dano = dados[0];
             if(jogador1->retornaDefendendo())
                 dano = jogador1->defender(dano);
-            if(jogador2->retornaDefendendoForte())
+            if(jogador1->retornaDefendendoForte())
                 dano = this->acaoSubclasse(jogador1, 5)[4];
             jogador1->recebeDano(dano);
         }
