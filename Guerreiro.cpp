@@ -134,7 +134,7 @@ int Guerreiro::ataqueForte(int distancia){
 }
 
 bool Guerreiro::atordoar() const{
-    if(rand() % 100 > 70){ // 5% de chance do movimento falhar
+    if(rand() % 100 > 70){ // 30% de chance do movimento falhar
         cout << "O atordoamento falhou.\n\n";
         return false;
     }
