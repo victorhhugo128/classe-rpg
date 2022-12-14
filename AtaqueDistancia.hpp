@@ -13,6 +13,8 @@ class AtaqueDistancia: public ClasseRpg
         virtual int ataqueCarregado() = 0;
 
         void modificaCarregandoAtaque(bool);
+        bool retornaCarregandoAtaque() const;
+        void recebeDano(int);
     private:
         bool carregando_ataque;
 };

@@ -1,7 +1,9 @@
 #include "AtaqueDistancia.hpp"
 #include<string>
+#include<iostream>
 
 using std::string;
+using std::cout;
 
 AtaqueDistancia::AtaqueDistancia(const string &nome, int ataque, int defesa, int n_acoes)
 :ClasseRpg(nome, ataque, defesa, n_acoes){
@@ -26,4 +28,14 @@ AtaqueDistancia::~AtaqueDistancia(){
 
 void AtaqueDistancia::modificaCarregandoAtaque(bool novo_estado){
     this->carregando_ataque = novo_estado;
+}
+
+bool AtaqueDistancia::retornaCarregandoAtaque() const{
+    return this->carregando_ataque;
+}
+
+void AtaqueDistancia::recebeDano(int dano){
+    cout << "O " << this->retornaClasse() << " " << this->retornaNome() << " perdeu " << dano << " de HP.\n\n";
+
+    this->modificaHp(-dano);
 }
