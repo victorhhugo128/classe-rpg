@@ -90,11 +90,11 @@ int Assassino::defender(int dano) const{
         return dano;
     } 
 
-    multiplicador = (rand() % 30 + 5)/100; // 5 - 35% de mitigação de dano
+    multiplicador = (rand() % 30 + 5)/100; // proporcional a 5 - 35% de mitigação de dano
 
     dano_mitigado = dano - this->retornaDefesa()*multiplicador;
 
-    cout << "O " << this->retornaClasse() << " " << this->retornaNome() << " defendeu com sucesso. Sofreu " << dano_mitigado << " de dano.\n\n";
+    cout << "O " << this->retornaClasse() << " " << this->retornaNome() << " defendeu com sucesso.\n\n";
 
     return dano;
 

@@ -11,6 +11,10 @@ class AtaqueDistancia: public ClasseRpg
         AtaqueDistancia(const AtaqueDistancia &);
         ~AtaqueDistancia();
         virtual int ataqueCarregado() = 0;
+
+        void modificaCarregandoAtaque(bool);
+    private:
+        bool carregando_ataque;
 };
 
 
