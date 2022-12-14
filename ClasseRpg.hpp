@@ -19,7 +19,7 @@ class ClasseRpg
         int hp, ataque, defesa;
         const int MAX_HP, N_ACOES;
         std::string nome;
-        bool atordoado = false, defendendo = false;
+        bool atordoado = false, defendendo = false, congelado = false;
     protected:
         int retornaHp() const;
         int retornaAtaque() const;
@@ -28,11 +28,13 @@ class ClasseRpg
         int retornaNAcoes() const;
         bool retornaAtordoado() const;
         bool retornaDefendendo() const;
+        bool retornaCongelado() const;
         void modificaAtaque(int);
         void modificaDefesa(int);
         void modificaHp(int);
         void modificaAtordoado(bool);
         void modificaDefendendo(bool);
+        void modificaCongelado(bool);
         void defineClasse(const std::string &);
         std::string retornaNome() const;
         std::string retornaClasse() const;

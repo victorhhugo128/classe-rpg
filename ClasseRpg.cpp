@@ -78,6 +78,10 @@ bool ClasseRpg::retornaDefendendo() const{
     return this->defendendo;
 }
 
+bool ClasseRpg::retornaCongelado() const{
+    return this->congelado;
+}
+
 void ClasseRpg::modificaAtaque(int acrescimo){
     this->ataque += acrescimo;
 }
@@ -100,6 +104,10 @@ void ClasseRpg::modificaAtordoado(bool novo_estado){
 
 void ClasseRpg::modificaDefendendo(bool novo_estado){
     this->defendendo = novo_estado;
+}
+
+void ClasseRpg::modificaCongelado(bool novo_estado){
+    this->congelado = novo_estado;
 }
 
 void ClasseRpg::defineClasse(const string &classe){
