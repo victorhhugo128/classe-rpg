@@ -93,7 +93,7 @@ int Guerreiro::defender(int dano) const{
         return dano;
     } 
 
-    multiplicador = (rand() % 60 + 10)/100; // proporcional a 10 - 70% de mitigação de dano
+    multiplicador = (rand() % 60 + 10)/100; // proporcional a 10 - 70% de mitigação de dano baseado na defesa
 
     dano_mitigado = dano - this->retornaDefesa()*multiplicador;
 

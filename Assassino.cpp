@@ -90,7 +90,7 @@ int Assassino::defender(int dano) const{
         return dano;
     } 
 
-    multiplicador = (rand() % 30 + 5)/100; // proporcional a 5 - 35% de mitigação de dano
+    multiplicador = (rand() % 30 + 5)/100; // proporcional a 5 - 35% de mitigação de dano baseado na defesa
 
     dano_mitigado = dano - this->retornaDefesa()*multiplicador;
 

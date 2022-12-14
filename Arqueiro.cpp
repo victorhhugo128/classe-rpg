@@ -22,7 +22,6 @@ Arqueiro::Arqueiro(const string &nome, bool buff_ataque, bool buff_defesa)
 Arqueiro::Arqueiro(const Arqueiro &other)
 :AtaqueDistancia(other), MAX_STAMINA(other.MAX_STAMINA){
     this->stamina = other.stamina;
-    this->defineClasse("arqueiro");
 }
 
 Arqueiro::~Arqueiro(){
@@ -78,12 +77,12 @@ int Arqueiro::defender(int dano) const{
     int dano_mitigado = 0;
     float multiplicador = 0;
 
-    if(rand() % 100 > 60){ // 50% de chance de defender corretamente
+    if(rand() % 100 > 60){ // 60% de chance de defender corretamente
         cout << "A defesa falhou.\n\n";
         return dano;
     } 
 
-    multiplicador = (rand() % 30 + 5)/100; // proporcional a 5 - 35% de mitigação de dano
+    multiplicador = (rand() % 30 + 5)/100; // proporcional a 5 - 35% de mitigação de dano baseado na defesa
 
     dano_mitigado = dano - this->retornaDefesa()*multiplicador;
 
