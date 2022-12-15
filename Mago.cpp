@@ -118,10 +118,15 @@ int Mago::bolaDeFogo(){
         return 0;
     }
 
-    int dano = 150;
-    float num_rand = rand() % 100, multiplicador = num_rand/100 * this->retornaAtaque()/3;
+    int dano = 10;
+    float num_rand = rand() % 50;
+    float multiplicador = (num_rand/100 * this->retornaAtaque());
 
     cout << "A bola de fogo de " << this->retornaClasse() << " " << this->retornaNome() << " foi um sucesso.\n\n";
+
+    cout << "dano: " << dano << "\nmultiplicador: " << multiplicador << "\nnum_rand: " << num_rand << "\n";
+
+    this->modificaMana(-50);
 
     return dano * multiplicador;
 }

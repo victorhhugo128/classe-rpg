@@ -11,7 +11,7 @@ class Feiticeiro: public Mago
         Feiticeiro(const Feiticeiro &);
         ~Feiticeiro();
 
-        bool congelar() const;
+        bool congelar();
 };
 
 

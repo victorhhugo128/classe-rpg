@@ -18,7 +18,7 @@ class Guerreiro: public AtaqueFisico
         int defender(int) const;
         int ataqueForte(int);
 
-        bool atordoar() const;
+        bool atordoar();
         int defesaForte(int) const;
         void recebeDano(int);
     private:

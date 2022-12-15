@@ -25,7 +25,8 @@ Feiticeiro::~Feiticeiro(){
 
 }
 
-bool Feiticeiro::congelar() const{
+bool Feiticeiro::congelar(){
+    this->modificaMana(-20);
     if(rand() % 100 > 60){ // 40% de chance do movimento falhar
         cout << "O congelamento falhou.\n\n";
         return false;
