@@ -18,7 +18,7 @@ using std::string;
 Jogo::Jogo()
 {
     this->jogadores;
-    this->turno = 0;
+    this->turno = 1;
     this->distancia = 2;
 }
 
@@ -132,90 +132,110 @@ void Jogo::adicionarJogador(const string &nome, const string &classe){
     // } 
 
     while(jogador1->retornaHp() > 0 && jogador2->retornaHp() > 0){
-        cout << "Turno " << this->turno << ":\n";
-        cout << "Vez de jogador " << jogador1->retornaNome() << "\n";
-        escolha1 = jogador1->escolheAcao();
         delete [] dados;
-        switch(escolha1){
-            case 1:
-                dados = new int[5]{jogador1->ataqueBasico(this->distancia), 0, 0, 0, 0};
-                break;
-            case 2:
-                dados = new int[5]{0, 0, 1, 0, 0};
-                break;
-            default:
-                dados = this->acaoSubclasse(jogador1, opcao);
-                break;
+        cout << "Turno " << this->turno << ":\n";
+        cout << "Vez de jogador " << jogador1->retornaNome() << "\n\n";
+        if(!jogador1->retornaAtordoado() && !jogador2->retornaCongelado()){
+            this->mostraInformacaoJogador(jogador1);
+            escolha1 = jogador1->escolheAcao();
+            switch(escolha1){
+                case 1:
+                    dados = new int[5]{jogador1->ataqueBasico(this->distancia), 0, 0, 0, 0};
+                    break;
+                case 2:
+                    dados = new int[5]{0, 0, 1, 0, 0};
+                    break;
+                default:
+                    dados = this->acaoSubclasse(jogador1, escolha1);
+                    break;
+            }
+
+            if(dados[0] > 0){
+                dano = dados[0];
+                if(jogador2->retornaDefendendo())
+                    dano = jogador2->defender(dano);
+                if(jogador2->retornaDefendendoForte())
+                    dano = this->acaoSubclasse(jogador2, 5)[4];
+                jogador2->recebeDano(dano);
+            }
+            else if(dados[1] > 0){
+                jogador2->modificaAtordoado(dados[1]);
+            }
+            else if(dados[2] > 0){
+                jogador1->modificaDefendendo(dados[2]);
+            }
+            else if(dados[3] > 0){
+                jogador2->modificaCongelado(dados[3]);
+            }
+            else if(dados[4] > 0){
+                jogador1->modificaDefendendoForte(dados[4]);
+            }
+        }
+        else{
+            cout << "O " << jogador1->retornaClasse() << " " << jogador1->retornaNome() << " está incapacitado. Perdeu a vez.\n\n";
         }
 
-        if(dados[0] > 0){
-            dano = dados[0];
-            if(jogador2->retornaDefendendo())
-                dano = jogador2->defender(dano);
-            if(jogador2->retornaDefendendoForte())
-                dano = this->acaoSubclasse(jogador2, 5)[4];
-            jogador2->recebeDano(dano);
-        }
-        else if(dados[1] > 0){
-            jogador2->modificaAtordoado(dados[1]);
-        }
-        else if(dados[2] > 0){
-            jogador1->modificaDefendendo(dados[2]);
-        }
-        else if(dados[3] > 0){
-            jogador2->modificaCongelado(dados[3]);
-        }
-        else if(dados[4] > 0){
-            jogador1->modificaDefendendoForte(dados[4]);
-        }
-
-        jogador2->modificaCongelado(false);
         jogador2->modificaDefendendo(false);
         jogador2->modificaDefendendoForte(false);
-        jogador2->modificaCongelado(false);
-        jogador2->modificaAtordoado(false);
-
-        escolha2 = jogador2->escolheAcao(); 
-        delete [] dados; 
-        switch(escolha2){
-            case 1:
-                dados = new int[5]{jogador2->ataqueBasico(this->distancia), 0, 0, 0, 0};
-                break;
-            case 2:
-                dados = new int[5]{0, 0, 1, 0, 0};
-                break;
-            default:
-                dados = this->acaoSubclasse(jogador2, opcao);
-                break;
-        }
-
-        if(dados[0] > 0){
-            dano = dados[0];
-            if(jogador1->retornaDefendendo())
-                dano = jogador1->defender(dano);
-            if(jogador1->retornaDefendendoForte())
-                dano = this->acaoSubclasse(jogador1, 5)[4];
-            jogador1->recebeDano(dano);
-        }
-        else if(dados[1] > 0){
-            jogador1->modificaAtordoado(dados[1]);
-        }
-        else if(dados[2] > 0){
-            jogador2->modificaDefendendo(dados[2]);
-        }
-        else if(dados[3] > 0){
-            jogador1->modificaCongelado(dados[3]);
-        }
-        else if(dados[4] > 0){
-            jogador2->modificaDefendendoForte(dados[4]);
-        }
-        jogador1->modificaCongelado(false);
-        jogador1->modificaDefendendo(false);
-        jogador1->modificaDefendendoForte(false);
         jogador1->modificaCongelado(false);
         jogador1->modificaAtordoado(false);
+
+        delete [] dados; 
+        
+        if(!jogador2->retornaAtordoado() && !jogador2->retornaCongelado()){
+            this->mostraInformacaoJogador(jogador2);
+            escolha2 = jogador2->escolheAcao(); 
+            switch(escolha2){
+                case 1:
+                    dados = new int[5]{jogador2->ataqueBasico(this->distancia), 0, 0, 0, 0};
+                    break;
+                case 2:
+                    dados = new int[5]{0, 0, 1, 0, 0};
+                    break;
+                default:
+                    dados = this->acaoSubclasse(jogador2, escolha2);
+                    break;
+            }
+
+            if(dados[0] > 0){
+                dano = dados[0];
+                if(jogador1->retornaDefendendo())
+                    dano = jogador1->defender(dano);
+                if(jogador1->retornaDefendendoForte())
+                    dano = this->acaoSubclasse(jogador1, 5)[4];
+                jogador1->recebeDano(dano);
+            }
+            else if(dados[1] > 0){
+                jogador1->modificaAtordoado(dados[1]);
+            }
+            else if(dados[2] > 0){
+                jogador2->modificaDefendendo(dados[2]);
+            }
+            else if(dados[3] > 0){
+                jogador1->modificaCongelado(dados[3]);
+            }
+            else if(dados[4] > 0){
+                jogador2->modificaDefendendoForte(dados[4]);
+                cout << jogador2->retornaDefendendoForte() << "\n";
+            }
+        }
+        else{
+            cout << "O " << jogador2->retornaClasse() << " " << jogador2->retornaNome() << " está incapacitado. Perdeu a vez.\n\n";
+        }
+
+        jogador1->modificaDefendendo(false);
+        jogador1->modificaDefendendoForte(false);
+        jogador2->modificaCongelado(false);
+        jogador2->modificaAtordoado(false);
+        
+
+        this->incrementaTurno();
         
     }
+}
+
+void Jogo::incrementaTurno(){
+    this->turno += 1;
 }
 
 //int* = [dano, atordoado, defendendo, congelado, defesa_forte]
@@ -226,7 +246,6 @@ int *Jogo::acaoSubclasse(ClasseRpg *classe_base, int opcao, int dano) const{
     int dano_inflingido;
 
     if(opcao == 3){
-        cout << "3!!";
         if(classe_distancia != 0){
             dano_inflingido = classe_distancia->ataqueCarregado();
             return new int[5]{dano_inflingido, 0, 0, 0, 0};
@@ -296,7 +315,6 @@ int *Jogo::acaoClasseFisico(AtaqueFisico *classe_fisico, int opcao, int dano) co
 
     if(opcao == 5){
         if(classe_guerreiro != 0){
-            cout << "?";
             defendendo_forte = classe_guerreiro->defesaForte(dano);
             if(classe_guerreiro->retornaDefendendoForte()){
                 return new int[5]{0, 0, 0, 0, defendendo_forte};
@@ -327,3 +345,56 @@ void Jogo::mostraJogadores()const{
     cout << "\t";
 
 } 
+
+void Jogo::mostraInformacaoJogador(ClasseRpg* classe_base) const{
+    AtaqueFisico *classe_fisico = dynamic_cast<AtaqueFisico*>(classe_base);
+    AtaqueDistancia *classe_distancia = dynamic_cast<AtaqueDistancia*>(classe_base);
+
+    cout << "Nome: " << classe_base->retornaNome() <<
+    "\nClasse: " << classe_base->retornaClasse() <<
+    "\nHP: " << classe_base->retornaHp() << "\n";
+
+    if(classe_fisico != 0){
+        mostraInformacaoAtaqueFisico(classe_fisico);
+    }
+    if(classe_distancia != 0){
+        mostraInformacaoAtaqueDistancia(classe_distancia);
+    }
+
+    cout << "\n";
+
+}
+
+void Jogo::mostraInformacaoAtaqueFisico(AtaqueFisico* classe_fisico) const{
+    Guerreiro *classe_guerreiro = dynamic_cast<Guerreiro*>(classe_fisico);
+    Assassino *classe_assassino = dynamic_cast<Assassino*>(classe_fisico);
+    Clerigo *classe_clerigo = dynamic_cast<Clerigo*>(classe_fisico);
+
+    if(classe_guerreiro != 0){
+        cout << "Stamina: " << classe_guerreiro->retornaStamina() << "\n";
+    }
+    if(classe_assassino != 0){
+        cout << "Stamina: " << classe_assassino->retornaStamina() << "\n";
+    }
+    if(classe_clerigo != 0){
+        cout << "Mana: " << classe_clerigo->retornaMana() << "\n";
+    }
+
+}
+
+void Jogo::mostraInformacaoAtaqueDistancia(AtaqueDistancia *classe_distancia) const{
+    Arqueiro *classe_arqueiro = dynamic_cast<Arqueiro *>(classe_distancia);
+    Mago *classe_mago = dynamic_cast<Mago *>(classe_distancia);
+    Feiticeiro *classe_feiticeiro = dynamic_cast<Feiticeiro *>(classe_distancia);
+
+    if(classe_arqueiro != 0){
+        cout << "Stamina: " << classe_arqueiro->retornaStamina() << "\n";
+    }
+    if(classe_mago != 0){
+        cout << "Mana: " << classe_mago->retornaMana() << "\n";
+    }
+    if(classe_feiticeiro != 0){
+        cout << "Mana: " << classe_feiticeiro->retornaMana() << "\n";
+    }
+
+}
