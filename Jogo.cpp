@@ -135,7 +135,7 @@ void Jogo::adicionarJogador(const string &nome, const string &classe){
         delete [] dados;
         cout << "Turno " << this->turno << ":\n";
         cout << "Vez de jogador " << jogador1->retornaNome() << "\n\n";
-        if(!jogador1->retornaAtordoado() && !jogador2->retornaCongelado()){
+        if(!jogador1->retornaAtordoado() && !jogador1->retornaCongelado()){
             this->mostraInformacaoJogador(jogador1);
             escolha1 = jogador1->escolheAcao();
             switch(escolha1){
@@ -393,8 +393,4 @@ void Jogo::mostraInformacaoAtaqueDistancia(AtaqueDistancia *classe_distancia) co
     if(classe_mago != 0){
         cout << "Mana: " << classe_mago->retornaMana() << "\n";
     }
-    if(classe_feiticeiro != 0){
-        cout << "Mana: " << classe_feiticeiro->retornaMana() << "\n";
-    }
-
 }
