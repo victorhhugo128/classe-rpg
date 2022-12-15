@@ -6,20 +6,20 @@ using std::string;
 using std::cout;
 
 ClasseRpg::ClasseRpg(const string &nome, int ataque, int defesa, int n_acoes)
-:MAX_HP(5000), N_ACOES(n_acoes)
+:MAX_HP(1000), N_ACOES(n_acoes)
 {
     this->nome = nome;
-    this->hp = 5000;
+    this->hp = 1000;
     this->ataque = ataque;
     this->defesa = defesa;
     this->classe = "";
 }
 
 ClasseRpg::ClasseRpg(const string &nome, bool buff_ataque, bool buff_defesa, int ataque, int defesa, int n_acoes)
-:MAX_HP(5000), N_ACOES(n_acoes)
+:MAX_HP(1000), N_ACOES(n_acoes)
 {   
     this->nome = nome;
-    this->hp = 5000;
+    this->hp = 1000;
     this->ataque = ataque;
     this->defesa = defesa;
     this->classe = "";
@@ -28,7 +28,7 @@ ClasseRpg::ClasseRpg(const string &nome, bool buff_ataque, bool buff_defesa, int
 }
 
 ClasseRpg::ClasseRpg(const ClasseRpg &other)
-:MAX_HP(5000), N_ACOES(other.N_ACOES)
+:MAX_HP(1000), N_ACOES(other.N_ACOES)
 {   
     this->nome = other.nome;
     this->hp = other.hp;
