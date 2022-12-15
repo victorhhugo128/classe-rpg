@@ -19,6 +19,12 @@ int main(){
     novo_jogo->adicionarJogador("Kratos", "Guerreiro");
     novo_jogo->adicionarJogador("Sage", "Clérigo");
 
+    novo_jogo->adicionarJogador("Cole", "Assassino");
+    novo_jogo->adicionarJogador("Dorian", "Mago");
+
+    novo_jogo->adicionarJogador("Criston", "Arqueiro");
+    novo_jogo->adicionarJogador("Merlys", "Feiticeiro");
+
     novo_jogo->iniciarJogo();
 
 }
