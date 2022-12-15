@@ -11,6 +11,8 @@ class Clerigo: public Guerreiro
         Clerigo(const Clerigo &);
         ~Clerigo();
 
+        int retornaMana() const;
+        void modificaMana(int);
         void curar();
     private:
         int mana;

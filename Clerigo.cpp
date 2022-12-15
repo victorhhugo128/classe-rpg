@@ -28,9 +28,19 @@ Clerigo::~Clerigo(){
 
 }
 
+int Clerigo::retornaMana() const{
+    return this->mana;
+}
+
+void Clerigo::modificaMana(int acrescimo){
+    this->mana = this->mana + acrescimo;
+}
+
+
 void Clerigo::curar(){
     int cura = 40;
 
     this->modificaHp(40);
     cout << "HP de " << this->retornaClasse() << " " << this->retornaNome() << " aumentado para " << this->retornaHp() << ".\n\n";
+    this->modificaMana(-30);
 }
