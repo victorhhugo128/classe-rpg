@@ -123,11 +123,11 @@ int Assassino::ataqueForte(int distancia){
     multiplicador = num_rand/100;
 
     if(rand() % 100 > 70){ // 30% de chance de ataque crítico
-        critico = 2;
+        critico = 1.3;
         cout << "Foi um ataque crítico!!\n";
     }
 
-    dano_de_ataque = (this->retornaAtaque() * 2 + this->retornaAtaque()*multiplicador) * critico;
+    dano_de_ataque = (this->retornaAtaque() * multiplicador) * critico;
 
     cout << "O ataque forte de " << this->retornaClasse() << " " << this->retornaNome() << " acertou.\n\n";
     this->modificaStamina(-20);
@@ -145,9 +145,11 @@ int Assassino::ataqueFlanqueado(int distancia){
         return 0;
     }
 
-    int dano = (this->retornaAtaque() * 2) * this->retornaAstucia()/4; // dano do ataque flanqueado
+    int dano = (this->retornaAtaque() * 1.1) * this->retornaAstucia()/10; // dano do ataque flanqueado
 
     cout << "O ataque flanqueado de " << this->retornaClasse() << " " << this->retornaNome() << " foi um sucesso!\n\n";
+
+    this->modificaStamina(-50);
 
     return dano;
 }

@@ -52,7 +52,7 @@ int Arqueiro::escolheAcao() const{
 }
 
 void Arqueiro::mostraAcoes() const{
-    cout << "1 - Ataque Básico\n2 - Defender\n3 - Ataque Carregado\n4 - Chuva de Flechasn\n";
+    cout << "1 - Ataque Básico\n2 - Defender\n3 - Ataque Carregado\n4 - Chuva de Flechas\n";
 }
 
 int Arqueiro::ataqueBasico(int distancia) const{
