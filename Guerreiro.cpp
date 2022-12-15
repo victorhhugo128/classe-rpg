@@ -39,8 +39,7 @@ int Guerreiro::retornaArmadura() const{
 
 int Guerreiro::escolheAcao() const{
     int escolha = -1, limite_maior = this->retornaNAcoes();
-
-    cout << "Escolha uma das ações para o turno do Guerreiro " << this->retornaNome() << ":\n";
+    cout << "Escolha uma das ações para o turno do " << this->retornaClasse() << " " << this->retornaNome() << ":\n";
     this->mostraAcoes();
     cin >> escolha;
     if(this->herdado)
@@ -118,8 +117,6 @@ int Guerreiro::ataqueForte(int distancia){
 
     int chances = 100, dano_de_ataque = 0, num_rand = rand() % chances;
     float multiplicador = 0;
-
-    cout << rand() % chances << "\n";
 
     if(rand() % chances > 80){ // 20% de chance do ataque falhar
         cout << "O ataque forte de " << this->retornaClasse() << " " << this->retornaNome() << " falhou.\n\n";
