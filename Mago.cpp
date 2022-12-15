@@ -124,8 +124,6 @@ int Mago::bolaDeFogo(){
 
     cout << "A bola de fogo de " << this->retornaClasse() << " " << this->retornaNome() << " foi um sucesso.\n\n";
 
-    cout << "dano: " << dano << "\nmultiplicador: " << multiplicador << "\nnum_rand: " << num_rand << "\n";
-
     this->modificaMana(-50);
 
     return dano * multiplicador;
